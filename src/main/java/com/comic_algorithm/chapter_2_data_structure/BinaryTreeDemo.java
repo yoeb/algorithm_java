@@ -11,6 +11,41 @@ import java.util.Stack;
  */
 public class BinaryTreeDemo {
 
+    public static void main(String[] args) {
+
+        // 构造二叉树
+        //              3
+        //           /     \
+        //          2        8
+        //        /  \     /   \
+        //      9    10 null     4
+        //     / \    | \
+        // null null null null
+        LinkedList<Integer> inputList = new LinkedList<>(Arrays.asList(3, 2, 9, null, null, 10, null, null, 8, null, 4));
+        TreeNode treeNode = createBinaryTree(inputList);
+
+        // 深度优先遍历 递归
+//        System.out.println("前序遍历");
+//        preOrderTraveral(treeNode);
+//        System.out.println("中序遍历");
+//        inOrderTraveral(treeNode);
+//        System.out.println("后序遍历");
+//        postOrderTraveral(treeNode);
+        // 深度优先遍历 非递归
+        System.out.println("非递归前序遍历");
+        preOrderTraveralWithStack(treeNode);
+        System.out.println("非递归中序遍历");
+        inOrderTraveralWithStack(treeNode);
+        System.out.println("非递归后序遍历");
+        postOrderTraveralWithStack(treeNode);
+
+        // 广度优先遍历
+//        System.out.println("层序遍历");
+//        levelOrderTraversal(treeNode);
+
+    }
+
+
     /**
      * 构建二叉树
      * @param inputList 输入序列
@@ -78,26 +113,9 @@ public class BinaryTreeDemo {
         TreeNode leftChild;
         TreeNode rightChild;
 
-        public TreeNode(int data) {
+        TreeNode(int data) {
             this.data = data;
         }
-    }
-
-    public static void main(String[] args) {
-        LinkedList<Integer> inputList = new LinkedList<>(Arrays.asList(3, 2, 9, null, null, 10, null, null, 8, null, 4));
-        TreeNode treeNode = createBinaryTree(inputList);
-//        System.out.println("前序遍历");
-//        preOrderTraveral(treeNode);
-//        System.out.println("中序遍历");
-//        inOrderTraveral(treeNode);
-//        System.out.println("后序遍历");
-//        postOrderTraveral(treeNode);
-//        System.out.println("非递归前序遍历");
-//        preOrderTraveralWithStack(treeNode);
-
-        System.out.println("层序遍历");
-        levelOrderTraversal(treeNode);
-
     }
 
     /**
@@ -120,6 +138,40 @@ public class BinaryTreeDemo {
                 treeNode = treeNode.rightChild;
             }
         }
+    }
+
+    /**
+     * 二叉树非递归中序遍历
+     * @param node 二叉树根节点
+     */
+    public static void inOrderTraveralWithStack(TreeNode node) {
+        Stack<TreeNode> stack = new Stack<>();
+
+        while (node != null || !stack.empty()) {
+            // 迭代访问节点的左孩子，并入栈
+            while (node != null) {
+                stack.push(node);
+                node = node.leftChild;
+            }
+            // 如果节点没有左孩子，则弹出栈顶节点，访问节点右孩子
+            if (!stack.empty()) {
+                node = stack.pop();
+                System.out.println(node.data);
+                node = node.rightChild;
+            }
+        }
+
+    }
+
+    /**
+     * 二叉树非递归后序遍历
+     * @param node 二叉树根节点
+     */
+    public static void postOrderTraveralWithStack(TreeNode node) {
+        Stack<TreeNode> stack = new Stack<>();
+
+        // TODO 用栈实现后序遍历
+
     }
 
     /**

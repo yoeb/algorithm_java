@@ -1,4 +1,4 @@
-package com.comic_algorithm.chapter_2_data_structure;
+package com.comic_algorithm.chapter_3;
 
 import java.util.Arrays;
 import java.util.LinkedList;

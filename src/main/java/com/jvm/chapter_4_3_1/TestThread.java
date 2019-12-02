@@ -3,7 +3,6 @@ package com.jvm.chapter_4_3_1;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.management.BufferPoolMXBean;
 
 /**
  * 线程监控
@@ -17,8 +16,8 @@ public class TestThread {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true)
-                    ;
+               while (true)
+                   ;            // 第20行
             }
         }, "testBusyThread");
         thread.start();
